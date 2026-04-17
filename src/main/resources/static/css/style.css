@@ -1,0 +1,283 @@
+:root {
+	--blood-red: #be1217;
+	--blood-mid: #8f0f15;
+	--blood-dark: #58070b;
+	--ink: #1a1f2b;
+	--frost: rgba(20, 14, 16, 0.84);
+	--line: rgba(255, 206, 208, 0.16);
+}
+
+body {
+	color: var(--ink);
+	position: relative;
+	overflow-x: hidden;
+	background: linear-gradient(180deg, #2d0507 0%, #5b090d 16%, #7f0d12 34%, #6d3b40 62%, #33252a 100%) fixed !important;
+}
+
+body::before {
+	content: "";
+	position: fixed;
+	inset: 0;
+	pointer-events: none;
+	background:
+		radial-gradient(circle at 8% -10%, rgba(255, 88, 98, 0.34) 0, rgba(255, 88, 98, 0) 30%),
+		radial-gradient(circle at 82% -4%, rgba(206, 24, 31, 0.4) 0, rgba(206, 24, 31, 0) 26%);
+	opacity: 0.85;
+	z-index: 0;
+}
+
+.d-flex,
+.card,
+.sidebar {
+	position: relative;
+	z-index: 2;
+}
+
+.flex-grow-1 {
+	background: linear-gradient(180deg, rgba(20, 12, 14, 0.12) 0%, rgba(20, 12, 14, 0.22) 100%);
+	min-height: 100vh;
+}
+
+.blood-rain {
+	position: fixed;
+	inset: 0;
+	pointer-events: none;
+	z-index: 1;
+	overflow: hidden;
+}
+
+.blood-drop {
+	position: absolute;
+	top: -40px;
+	width: var(--drop-size, 13px);
+	height: calc(var(--drop-size, 13px) * 1.65);
+	background: linear-gradient(180deg, #ff8188 0%, var(--blood-red) 44%, var(--blood-mid) 72%, var(--blood-dark) 100%);
+	clip-path: polygon(50% 0%, 63% 16%, 78% 38%, 84% 55%, 81% 72%, 67% 88%, 50% 100%, 33% 88%, 19% 72%, 16% 55%, 22% 38%, 37% 16%);
+	box-shadow: 0 0 14px rgba(139, 7, 12, 0.34), 0 0 2px rgba(255, 178, 182, 0.9) inset;
+	opacity: 0;
+	filter: saturate(1.15);
+	animation: blood-fall var(--fall-duration, 11s) cubic-bezier(0.34, 0.07, 0.24, 1) infinite;
+	animation-delay: var(--fall-delay, 0s);
+}
+
+.blood-drop::after {
+	content: "";
+	position: absolute;
+	left: 46%;
+	top: -32%;
+	width: 2px;
+	height: 16px;
+	transform: translateX(-50%);
+	background: linear-gradient(180deg, rgba(255, 148, 156, 0.85), rgba(255, 148, 156, 0));
+	border-radius: 999px;
+}
+
+@keyframes blood-fall {
+	0% {
+		transform: translate3d(0, -16vh, 0) scale(0.9);
+		opacity: 0;
+	}
+	10% {
+		opacity: 0.95;
+	}
+	92% {
+		opacity: 0.9;
+	}
+	100% {
+		transform: translate3d(var(--drift, 22px), 118vh, 0) scale(1.05);
+		opacity: 0;
+	}
+}
+
+.sidebar {
+	background: linear-gradient(180deg, #2d0507 0%, #5b090d 16%, #7f0d12 34%, #6d3b40 62%, #33252a 100%) !important;
+	-webkit-backdrop-filter: blur(6px);
+	backdrop-filter: blur(6px);
+	box-shadow: 8px 0 28px rgba(22, 7, 8, 0.35);
+}
+
+.sidebar a,
+.logout-btn {
+	border-left: 3px solid transparent;
+	transition: all 0.2s ease;
+}
+
+.sidebar a:hover,
+.sidebar a.active,
+.logout-btn:hover {
+	border-left-color: #ffd2d3;
+	background: rgba(255, 255, 255, 0.16);
+}
+
+.card {
+	border-radius: 16px;
+	border: 1px solid var(--line);
+	background: var(--frost);
+	box-shadow: 0 14px 28px rgba(98, 13, 18, 0.12);
+	color: #fff2f2;
+}
+
+.table {
+	--bs-table-bg: transparent;
+	--bs-table-color: #ffeaea;
+	--bs-table-striped-color: #ffeaea;
+	--bs-table-striped-bg: rgba(255, 255, 255, 0.035);
+	--bs-table-hover-color: #fff4f4;
+	--bs-table-hover-bg: rgba(255, 255, 255, 0.05);
+}
+
+.table > :not(caption) > * > * {
+	border-color: rgba(255, 225, 226, 0.14);
+}
+
+.card table thead th {
+	color: #fff2f2 !important;
+	background: rgba(255, 255, 255, 0.08) !important;
+	font-weight: 700;
+}
+
+.card table tbody td,
+.card table tbody th {
+	color: #ffe9ea !important;
+}
+
+.card table thead,
+.card table thead[style],
+.card table thead tr,
+.card table thead tr[style] {
+	background: rgba(255, 255, 255, 0.08) !important;
+	color: #fff2f2 !important;
+}
+
+.card table a,
+.card a {
+	color: #ffd7da;
+}
+
+.card table a:hover,
+.card a:hover {
+	color: #fff3f4;
+}
+
+.flex-grow-1 p.text-muted {
+	color: #ffe4e6 !important;
+	text-shadow: 0 1px 8px rgba(50, 4, 7, 0.5);
+}
+
+.table-light,
+.table-light > :not(caption) > * > * {
+	--bs-table-bg: rgba(255, 255, 255, 0.08);
+	--bs-table-color: #ffeaea;
+}
+
+.list-group-item {
+	background: rgba(255, 255, 255, 0.04);
+	color: #ffeaea;
+	border-color: rgba(255, 225, 226, 0.14);
+}
+
+.form-control,
+.form-select {
+	background: rgba(16, 10, 12, 0.58);
+	color: #fff2f2;
+	border-color: rgba(255, 210, 212, 0.28);
+}
+
+.form-control::placeholder {
+	color: rgba(255, 220, 222, 0.68);
+}
+
+.form-control:focus,
+.form-select:focus {
+	background: rgba(16, 10, 12, 0.72);
+	color: #fff2f2;
+	border-color: rgba(255, 169, 173, 0.55);
+	box-shadow: 0 0 0 0.2rem rgba(190, 18, 23, 0.2);
+}
+
+.bg-white {
+	background: rgba(255, 255, 255, 0.08) !important;
+	color: #ffeaea;
+}
+
+.card .text-muted,
+.table .text-muted,
+.list-group .text-muted {
+	color: #e6bfc2 !important;
+}
+
+/* Keep unread notifications readable by using a dark tint instead of pale background */
+.notification-row.unread {
+	background: rgba(129, 14, 20, 0.42) !important;
+	border-left-color: #ff7278 !important;
+	color: #fff2f2 !important;
+}
+
+.notification-row.unread .fw-semibold,
+.notification-row.unread .text-muted,
+.notification-row.unread small,
+.notification-row.unread div {
+	color: #ffe7e9 !important;
+}
+
+/* Auth cards use a lighter panel, so override dark-form rules for readability */
+.login-card,
+.register-card {
+	background: rgba(255, 248, 248, 0.94) !important;
+	color: #2c1215 !important;
+}
+
+.login-card .text-muted,
+.register-card .text-muted {
+	color: #8e4b51 !important;
+	text-shadow: none !important;
+}
+
+.login-card .form-label,
+.register-card .form-label {
+	color: #5a2428 !important;
+	font-weight: 600;
+}
+
+.login-card .form-control,
+.register-card .form-control,
+.register-card .form-select {
+	background: #ffffff !important;
+	color: #2c1215 !important;
+	border-color: #d6b8bc !important;
+}
+
+.login-card .form-control::placeholder,
+.register-card .form-control::placeholder {
+	color: #8f7578 !important;
+}
+
+.login-card a,
+.register-card a {
+	color: #b50f1d !important;
+	font-weight: 600;
+}
+
+.btn-danger,
+.btn-primary-red,
+.btn[style*="background:#c0392b"] {
+	border: none;
+	background: linear-gradient(135deg, var(--blood-red), var(--blood-mid) 55%, var(--blood-dark)) !important;
+	box-shadow: 0 10px 20px rgba(198, 30, 34, 0.22);
+}
+
+.btn-danger:hover,
+.btn-primary-red:hover,
+.btn[style*="background:#c0392b"]:hover {
+	filter: brightness(1.05);
+}
+
+.flex-grow-1 > h4 {
+	color: #fff7f8;
+	text-shadow: 0 2px 10px rgba(60, 5, 8, 0.55);
+}
+
+.flex-grow-1 > p.text-muted {
+	color: #ffe4e6 !important;
+	text-shadow: 0 1px 8px rgba(50, 4, 7, 0.5);
+}
